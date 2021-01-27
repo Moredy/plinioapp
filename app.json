@@ -1,7 +1,12 @@
 {
   "expo": {
-    "name": "adoptApp",
-    "slug": "adoptApp",
+    "name": "expo-google-login-youtube",
+    "slug": "expo-google-login-youtube",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,13 +25,7 @@
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+      "package": "com.adoptapp.bdsp"
     }
   }
 }
