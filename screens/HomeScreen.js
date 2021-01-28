@@ -6,6 +6,9 @@ import firebase from 'firebase';
 
 import MainListCard from '../components/MainListCard'
 
+import {
+  petList,
+} from "../variables/petList.js";
 
 export default function HomeScreen({ navigation }) {
 
@@ -25,8 +28,21 @@ export default function HomeScreen({ navigation }) {
     //Salva o pet no LocalStorage.
     saveSelectedPetOnLocalStorage(petId)
 
-    navigation.navigate('PetInfoScreen')
+    navigation.navigate('PetInfoScreen', { petId } )
     //Navegar para tela de adoção
+
+  }
+
+  const renderList = () => {
+
+    for (let i = 0 ; i < petList.length; i ++) {
+      <MainListCard
+      name={petList[i].name}
+      img={{uri: petList[i].thumbnail}}
+      subtitle={petList[i].description}
+      onPress={() => haddleSelectPet(petList[i].id)} />
+    }
+
 
   }
 
@@ -36,29 +52,20 @@ export default function HomeScreen({ navigation }) {
     <Container>
 
 
+
+
       <Content>
 
+      {petList.map((item, index) => {
+         return (
+          <MainListCard
+          name={petList[index].name}
+          img={{uri: petList[index].thumbnail}}
+          subtitle={petList[index].description}
+          onPress={() => haddleSelectPet(petList[index].id)} />
+         );
+      })}
 
-        <MainListCard
-          name="Belinha"
-          img={require('../assets/belinha.png')}
-          subtitle="line number one"
-          onPress={() => haddleSelectPet("abc123")}
-        />
-
-        <MainListCard
-          name="Rubens"
-          img={require('../assets/rubens.png')}
-          subtitle="line number two"
-          onPress={() => haddleSelectPet("abc321")}
-        />
-
-        <MainListCard
-          name="Robinho"
-          img={require('../assets/robinho.png')}
-          subtitle="line number two"
-          onPress={() => haddleSelectPet("adb333")}
-        />
        
       </Content>
        
