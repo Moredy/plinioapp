@@ -13,15 +13,22 @@ class PetInfoControlScreen extends Component {
         console.log('AUTH STATE CHANGED CALLED ')
         if (user) {
 
-          this.props.navigation.navigate('AdocaoScreen');
+          const petObj = this.props.navigation.getParam('petObj', 'NO-OBJ')
+
+          this.props.navigation.navigate('AdocaoScreen', { petObj });
         } else {
           this.props.navigation.navigate('LoginScreen');
         }
       }.bind(this)
     );
   };
+  
+ 
+  
 
   render() {
+
+
     return (
       <View style={styles.container}>
         <ActivityIndicator size="large" />

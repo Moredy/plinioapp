@@ -24,7 +24,7 @@ function PetInfoScreen({ navigation }) {
 
   const petObj = getPetInfo(petId);
 
-  console.log (getPetInfo (petId))
+  //console.log (getPetInfo (petId))
 
     return (
       <View style={styles.container}>
@@ -39,7 +39,7 @@ function PetInfoScreen({ navigation }) {
         <Text>Tags: {petObj.tags}</Text>
 
 
-        <Button title="Adotar" onPress={() => navigation.navigate('PetInfoControlScreen')} />
+        <Button title="Adotar" onPress={() => navigation.navigate('PetInfoControlScreen', { petObj })} />
         <Button title="Voltar para home" onPress={() => navigation.navigate('HomeScreen')} />
 
       </View>
