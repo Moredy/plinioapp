@@ -1,5 +1,5 @@
 import React, { Component , useState, useEffect  } from 'react';
-import { View, StyleSheet, Button , TextInput } from 'react-native';
+import { View, StyleSheet, Button , TextInput , Alert } from 'react-native';
 
 import { Container, Header, Content, Form, Item, Input, Label , Text} from 'native-base';
 import firebase from 'firebase';
@@ -18,20 +18,78 @@ function AdocaoScreen({ navigation }) {
       // No user is signed in.
     }
 
-  const sendAdoptRequest = () => {
 
 
+  const writeNewUserData = () => {
 
-  }
-
-
-  const registerNewData = () => {
-
+    if (adress && phone) {
 
     firebase.database().ref('users/' + userUid).update({
       adress: adress,
       phone: phone
     });
+    
+  }
+
+  }
+
+  const successMessage = () => {
+    Alert.alert(
+      "Pedido para adoção",
+      "Seu pedido foi registrado com sucesso, agora você pode acompanhar o processo de adoção em `Minhas Adoções`. ",
+      [
+        {
+          text: "Voltar para home",
+          onPress: () => navigation.navigate('HomeScreen'),
+          style: "cancel"
+        },
+        { text: "Ir para minhas adoções", onPress: () => navigation.navigate('MinhasAdocoesScreen') }
+      ],
+      { cancelable: false }
+    );
+
+  }
+
+  const writeNewAdoptRequest = async () => {
+
+    let userDataObj;
+
+    await firebase.database().ref('/users/' + userUid).once('value').then((snapshot) => {
+      if (snapshot.val()) {
+        userDataObj = {
+          first_name: snapshot.val().first_name,
+          last_name: snapshot.val().last_name,
+          gmail: snapshot.val().gmail,
+          adress: snapshot.val().adress,
+          created_at: snapshot.val().created_at,
+          phone: snapshot.val().phone,
+          profile_picture: snapshot.val().profile_picture
+        }
+      }
+    });
+
+    const adoptRequest = [petObj, userDataObj];
+
+    //Pedido de adoção
+    console.log (adoptRequest)
+
+    if (petObj && userDataObj) {
+      return 1; //Sucess return
+    }
+  }
+
+  const  haddleConfirmAdopt = async () => {
+   
+    writeNewUserData()
+
+    if (await writeNewAdoptRequest() == 1)
+    {
+      successMessage ()
+    }
+    else{
+      alert ("Ocorreu algum erro :( ")
+    }
+    
 
   }
 
@@ -44,7 +102,7 @@ function AdocaoScreen({ navigation }) {
 
   firebase.database().ref('/users/' + userUid).once('value').then((snapshot) => {
     if (snapshot.val()) {
-      console.log (snapshot.val().adress)
+      //console.log (snapshot.val().adress)
     setAdressStatic(snapshot.val().adress)
     setPhoneStatic(snapshot.val().phone)
     }
@@ -79,7 +137,7 @@ function AdocaoScreen({ navigation }) {
       ) : null}
 
         { phone && adress || adressStatic && phoneStatic ? (
-        <Button title="Eu concordo com os termos do aplicativo e gostaria de aplicar para adoção" onPress={registerNewData} />
+        <Button title="Eu concordo com os termos do aplicativo e gostaria de aplicar para adoção" onPress={haddleConfirmAdopt} />
         ) : null}
 
         <Text>Você está prestes a adotar {petObj.name}</Text>

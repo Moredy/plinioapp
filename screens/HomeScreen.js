@@ -16,7 +16,7 @@ export default function HomeScreen({ navigation }) {
   const saveSelectedPetOnLocalStorage = async (petId) => {
 
     try {
-      await AsyncStorage.setItem('@selectedPet_id', petId)
+      await AsyncStorage.setItem('@selectedPet_id', `${petId}`)
     } catch (e) {
       // saving error
     }
@@ -59,6 +59,7 @@ export default function HomeScreen({ navigation }) {
       {petList.map((item, index) => {
          return (
           <MainListCard
+          key={index}
           name={petList[index].name}
           img={{uri: petList[index].thumbnail}}
           subtitle={petList[index].description}
