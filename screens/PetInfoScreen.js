@@ -39,7 +39,7 @@ function PetInfoScreen({ navigation }) {
         <Text>Tags: {petObj.tags}</Text>
 
 
-        <Button title="Adotar" onPress={() => navigation.navigate('PetInfoControlScreen', { petObj })} />
+        <Button title="Adotar" onPress={() => navigation.navigate('AdocaoControlScreen', { petObj })} />
         <Button title="Voltar para home" onPress={() => navigation.navigate('HomeScreen')} />
 
       </View>

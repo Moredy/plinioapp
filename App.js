@@ -4,7 +4,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 import LoginScreen from './screens/LoginScreen';
 import PetInfoScreen from './screens/PetInfoScreen';
-import PetInfoControlScreen from './screens/PetInfoControlScreen';
+import AdocaoControlScreen from './screens/AdocaoControlScreen';
 import HomeScreen from './screens/HomeScreen';
 import AdocaoScreen from './screens/AdocaoScreen';
 
@@ -21,7 +21,7 @@ export default class App extends React.Component {
 
 const AppSwitchNavigator = createSwitchNavigator({
   HomeScreen: HomeScreen,
-  PetInfoControlScreen: PetInfoControlScreen,
+  AdocaoControlScreen: AdocaoControlScreen,
   LoginScreen: LoginScreen,
   PetInfoScreen: PetInfoScreen,
   AdocaoScreen: AdocaoScreen,

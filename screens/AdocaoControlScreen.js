@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import firebase from 'firebase';
 
-class PetInfoControlScreen extends Component {
+class AdocaoControlScreen extends Component {
   componentDidMount() {
     this.checkIfLoggedIn();
   }
@@ -36,7 +36,7 @@ class PetInfoControlScreen extends Component {
     );
   }
 }
-export default PetInfoControlScreen;
+export default AdocaoControlScreen;
 
 const styles = StyleSheet.create({
   container: {

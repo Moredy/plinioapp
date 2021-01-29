@@ -1,8 +1,9 @@
-import React, { Component , useState, useEffect  } from 'react';
-import { View, StyleSheet, Button , TextInput , Alert } from 'react-native';
+import React, { Component, useState, useEffect } from 'react';
+import { View, StyleSheet, Button, TextInput, Alert, ActivityIndicator, Text } from 'react-native';
 
-import { Container, Header, Content, Form, Item, Input, Label , Text} from 'native-base';
+import { Container, Header, Form, Item, Input, Label, Content, Card, CardItem, Body, Left , Right, Title, Subtitle } from 'native-base';
 import firebase from 'firebase';
+import { NavigationNativeContainer } from '@react-navigation/native';
 
 function AdocaoScreen({ navigation }) {
 
@@ -12,11 +13,11 @@ function AdocaoScreen({ navigation }) {
 
   var user = firebase.auth().currentUser;
 
-    if (user) {
-      userUid = user.uid
-    } else {
-      // No user is signed in.
-    }
+  if (user) {
+    userUid = user.uid
+  } else {
+    // No user is signed in.
+  }
 
 
 
@@ -24,12 +25,12 @@ function AdocaoScreen({ navigation }) {
 
     if (adress && phone) {
 
-    firebase.database().ref('users/' + userUid).update({
-      adress: adress,
-      phone: phone
-    });
-    
-  }
+      firebase.database().ref('users/' + userUid).update({
+        adress: adress,
+        phone: phone
+      });
+
+    }
 
   }
 
@@ -71,31 +72,30 @@ function AdocaoScreen({ navigation }) {
     const adoptRequest = [petObj, userDataObj];
 
     //Pedido de adoção
-    console.log (adoptRequest)
+    console.log(adoptRequest)
 
     if (petObj && userDataObj) {
       return 1; //Sucess return
     }
   }
 
-  const  haddleConfirmAdopt = async () => {
-   
+  const haddleConfirmAdopt = async () => {
+
     writeNewUserData()
 
-    if (await writeNewAdoptRequest() == 1)
-    {
-      successMessage ()
+    if (await writeNewAdoptRequest() == 1) {
+      successMessage()
     }
-    else{
-      alert ("Ocorreu algum erro :( ")
+    else {
+      alert("Ocorreu algum erro :( ")
     }
-    
+
 
   }
 
-  
-  const [adressStatic, setAdressStatic] = useState("");
-  const [phoneStatic, setPhoneStatic] = useState("");
+
+  const [adressStatic, setAdressStatic] = useState("loading");
+  const [phoneStatic, setPhoneStatic] = useState("loading");
 
 
 
@@ -103,50 +103,89 @@ function AdocaoScreen({ navigation }) {
   firebase.database().ref('/users/' + userUid).once('value').then((snapshot) => {
     if (snapshot.val()) {
       //console.log (snapshot.val().adress)
-    setAdressStatic(snapshot.val().adress)
-    setPhoneStatic(snapshot.val().phone)
+      setAdressStatic(snapshot.val().adress)
+      setPhoneStatic(snapshot.val().phone)
     }
   });
-  
+
 
   const [adress, setAdress] = useState("");
   const [phone, setPhone] = useState("");
 
 
-  
-    return (
-      <View style={styles.container}>
-        <Text>AdocaoScreen</Text>
 
-        <Text>Leia os termos e caso necessário finalize o seu perfil para aplicar para adoção!</Text>
+  return (
 
-        <Text> TERMOSBLA BLA BALBALBLA BALBALBLA BALBALBLA BALBALBLA BALBALBLA BALBAL BLA BALBALBLA BALBALBLA BALBAL</Text>
+    <Container>
 
-        {!adressStatic ? (
+        <Header>
+          <Left/>
+          <Body>
+            <Text style={styles.title}>Adotar {petObj.name} </Text>
+         
+          </Body>
+          <Right />
+        </Header>
+
+      <Container style={styles.container}>
+
+
+        <Text style={{ marginBottom: "5%" }}>Leia os termos e caso necessário finalize o seu perfil para aplicar para adoção!</Text>
+
+        <Content style={styles.container2}>
+          <Card style={{ marginBottom: "5%" }}>
+            <CardItem header>
+              <Text>TERMOS PARA ADOÇÃO</Text>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text style={{textTransform : "uppercase"}}>
+                  Ao adotar {petObj.name}, declaro-me apto para assumir a guarda e a responsabilidade sobre este animal, eximindo o doador de toda e
+qualquer responsabilidade por quaisquer atos praticados pelo animal a partir desta data.  Declaro ainda estar ciente de todos os cuidados que este
+animal exige no que se refere à sua guarda e manutenção, além de conhecer todos os riscos inerentes à espécie no convívio com humanos,
+estando apto a guardá-lo e vigiá-lo, comprometendo-me a proporcionar boas condições de alojamento e alimentação, assim como, espaço físico
+que possibilite o animal se exercitar
+                </Text>
+              </Body>
+            </CardItem>
+          </Card >
+
+
+          {adressStatic == "loading" || phoneStatic == "loading" ? (
             <Item stackedLabel>
+              <ActivityIndicator size="large" color="#0000ff" />
+            </Item>
+          ) : null}
+
+          {!adressStatic ? (
+            <Item stackedLabel style={{ marginBottom: "5%" }}>
               <Label>Endereço</Label>
               <TextInput onChangeText={text => setAdress(text)} />
             </Item>
-        ) : null}
+          ) : null}
 
-      {!phoneStatic ? (
-      <Item stackedLabel>
-        <Label>Telefone</Label>
-        <TextInput onChangeText={text => setPhone(text)} />
-      </Item>
-      ) : null}
+          {!phoneStatic ? (
+            <Item stackedLabel style={{ marginBottom: "5%" }} >
+              <Label>Telefone</Label>
+              <TextInput onChangeText={text => setPhone(text)} />
+            </Item>
+          ) : null}
 
-        { phone && adress || adressStatic && phoneStatic ? (
-        <Button title="Eu concordo com os termos do aplicativo e gostaria de aplicar para adoção" onPress={haddleConfirmAdopt} />
-        ) : null}
+          {phone && adress || adressStatic && phoneStatic ? (
+            <Button title="Eu concordo com os termos e gostaria de aplicar para adoção" onPress={haddleConfirmAdopt} />
+          ) : null}
 
-        <Text>Você está prestes a adotar {petObj.name}</Text>
-        <Button title="Sign out" onPress={() => firebase.auth().signOut()} />
+        
+
+
+        </Content>
+
+        {/*<Button title="Sign out" onPress={() => firebase.auth().signOut()} />*/}
+        
         <Button title="Voltar para home" onPress={() => navigation.navigate('HomeScreen')} />
-      
-
-      </View>
-    );
+      </Container>
+    </Container>
+  );
 
 }
 export default AdocaoScreen;
@@ -154,7 +193,20 @@ export default AdocaoScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
+    marginTop: "5%",
+    marginBottom: "5%",
+    justifyContent: 'center',
+    marginLeft: "4%",
+    marginRight: "4%"
+  },
+  container2: {
+    marginBottom: "5%",
+
+  },
+  title: {
+    fontSize: 16,
+    color: "#fff",
+  },
+
+
 });

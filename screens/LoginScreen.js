@@ -40,7 +40,7 @@ class LoginScreen extends Component {
             .then(function(result) {
               console.log('user signed in ');
 
-              //navigation.navigate('PetInfoControlScreen');
+              //navigation.navigate('AdocaoControlScreen');
               
               if (result.additionalUserInfo.isNewUser) {
                 firebase

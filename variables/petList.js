@@ -40,7 +40,7 @@ const petList = [
         name: "Cleitinho",
         description: "Aquele gatinho camarada.",
         region: "Ponte Grande",
-        thumbnail: "https://lh3.googleusercontent.com/proxy/ud64DaT1GDQaT55BJ3Q_eS2ZeLRM76AH_JnDGE9hWcC7P8XTyUaI6bbPDlsLiVDPLLFKNt3w5Fhfl_XQc3M-Ooso_10wxFwMFmk2uDAgI1Najvu18xtX5MgqP-NG6BkW5IrL1Mt1CtAF",
+        thumbnail: "https://i.pinimg.com/474x/1b/e4/94/1be494c3c065c9c97da3231f7303ee85.jpg",
         bornDate: "1611756268282",
         gender: "male",
         ongId: "42",

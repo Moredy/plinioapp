@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo-google-login-youtube",
-    "slug": "expo-google-login-youtube",
+    "name": "adoptapp",
+    "slug": "adoptapp",
     "privacy": "public",
     "platforms": [
       "ios",
