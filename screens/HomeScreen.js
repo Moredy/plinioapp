@@ -33,6 +33,7 @@ export default function HomeScreen({ navigation }) {
 
   }
 
+
   const renderList = () => {
 
     for (let i = 0 ; i < petList.length; i ++) {
@@ -67,8 +68,18 @@ export default function HomeScreen({ navigation }) {
          );
       })}
 
+    <Button
+  style={{fontSize: 20, color: 'green'}}
+  styleDisabled={{color: 'red'}}
+  onPress={() => firebase.auth().signOut()}
+  title="Deslogar"
+>
+  Deslogar
+</Button>
        
       </Content>
+
+
        
 
     </Container>
