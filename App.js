@@ -7,6 +7,8 @@ import PetInfoScreen from './screens/PetInfoScreen';
 import AdocaoControlScreen from './screens/AdocaoControlScreen';
 import HomeScreen from './screens/HomeScreen';
 import AdocaoScreen from './screens/AdocaoScreen';
+import { Ionicons } from '@expo/vector-icons';
+
 
 
 import * as firebase from 'firebase';
@@ -14,6 +16,23 @@ import { firebaseConfig } from './config';
 firebase.initializeApp(firebaseConfig);
 
 export default class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false,
+    };
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+      ...Ionicons.font,
+    });
+    this.setState({ isReady: true });
+  }
+  
   render() {
     return <AppNavigator />;
   }

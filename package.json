@@ -24,7 +24,7 @@
     "@use-expo/font": "^2.0.0",
     "expo": "^40.0.0",
     "expo-asset": "~8.2.0",
-    "expo-font": "~8.3.0",
+    "expo-font": "~8.4.0",
     "expo-google-app-auth": "^8.1.4",
     "firebase": "^7.9.0",
     "galio-framework": "^0.7.1",

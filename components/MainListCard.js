@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Header, Content, Card, CardItem, Body, Text, Left, Right, Thumbnail, Subtitle, Button, Icon } from 'native-base';
 import { Platafrom, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
 import { Alert, TouchableHighlight, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default class MainListCard extends Component {
 
@@ -12,7 +12,9 @@ export default class MainListCard extends Component {
 
 
       <Card button onPress={
-        this.props.onPress}>
+        this.props.onPress}
+        
+        >
         {/*
      
         <CardItem button onPress={
@@ -36,27 +38,51 @@ export default class MainListCard extends Component {
 
 
         <CardItem button onPress={
-        this.props.onPress}>
-          <Image source={this.props.img} style={{ height: 200, width: null, flex: 1 }} />
+        this.props.onPress}
+
+        style={{
+          paddingLeft: 0,
+          paddingRight: 0,
+          paddingTop: 0,
+          paddingBottom: 0
+      }}
+    
+        >
+
+
+        
+        <Image source={this.props.img} style={{ height: 300, width: null, flex: 1, position: "relative"}} ></Image>
+
+        <MaterialCommunityIcons name="bookmark" style={{ height: null , position: "absolute", top: 30, right: 30 }} size={34} color="black"></MaterialCommunityIcons>
 
         </CardItem>
 
         <CardItem>
           <Left>
             <Body>
-              <Text style={text.title}>{this.props.name}</Text>
+              <Text style={text.title} >{this.props.name}</Text>
+              <View style={{ borderBottomColor: '#0ABAB5' ,borderBottomWidth: 4, width: 38 }}
+/>
+              
+      
             </Body>
           </Left>
 
           <Right>
             <Body>
-              <Icon name="logo-github"><Text style={text.iconText}>2 Meses</Text></Icon>
+              <MaterialCommunityIcons name="calendar-month"  size={24} color="black"><Text style={text.iconText}>2 Meses</Text></MaterialCommunityIcons>
             </Body>
           </Right>
 
           <Right>
             <Body>
-              <Icon name="logo-github"><Text style={text.iconText}>Macho</Text></Icon>
+              {this.props.gender == "male" ? (
+                <MaterialCommunityIcons name="gender-male"  size={24} color="black"><Text style={text.iconText}>Macho</Text></MaterialCommunityIcons>
+                )
+                : <MaterialCommunityIcons name="gender-female"  size={24} color="black"><Text style={text.iconText}>Fêmea</Text></MaterialCommunityIcons> }
+               
+              
+              
             </Body>
           </Right>
 
@@ -80,11 +106,12 @@ export default class MainListCard extends Component {
 
 const text = StyleSheet.create({
   title: {
-    fontSize: 20,
+    fontSize: 25,
     color: "#000",
-    fontWeight: "bold",
+    //fontWeight: "bold",
     textAlign: "left",
     width: "100%",
+
     /*
     Debugger
     borderWidth: 2,

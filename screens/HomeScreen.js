@@ -64,6 +64,7 @@ export default function HomeScreen({ navigation }) {
           name={petList[index].name}
           img={{uri: petList[index].thumbnail}}
           subtitle={petList[index].description}
+          gender={petList[index].gender}
           onPress={() => haddleSelectPet(petList[index].id)} />
          );
       })}
