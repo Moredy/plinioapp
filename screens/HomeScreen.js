@@ -28,7 +28,7 @@ export default function HomeScreen({ navigation }) {
     //Salva o pet no LocalStorage.
     saveSelectedPetOnLocalStorage(petId)
 
-    navigation.navigate('PetInfoScreen', { petId } )
+    navigation.navigate('PetInfoScreen', { petId })
     //Navegar para tela de adoção
 
   }
@@ -36,12 +36,13 @@ export default function HomeScreen({ navigation }) {
 
   const renderList = () => {
 
-    for (let i = 0 ; i < petList.length; i ++) {
+    for (let i = 0; i < petList.length; i++) {
       <MainListCard
-      name={petList[i].name}
-      img={{uri: petList[i].thumbnail}}
-      subtitle={petList[i].description}
-      onPress={() => haddleSelectPet(petList[i].id)} />
+        name={petList[i].name}
+        img={{ uri: petList[i].thumbnail }}
+        subtitle={petList[i].description}
+        onPress={() => haddleSelectPet(petList[i].id)} 
+        />
     }
 
 
@@ -49,40 +50,33 @@ export default function HomeScreen({ navigation }) {
 
 
   return (
-   
-    <Container>
 
-
-
+    <Container style={styles.container}>
 
       <Content>
 
-      {petList.map((item, index) => {
-         return (
-          <MainListCard
-          key={index}
-          name={petList[index].name}
-          img={{uri: petList[index].thumbnail}}
-          subtitle={petList[index].description}
-          gender={petList[index].gender}
-          onPress={() => haddleSelectPet(petList[index].id)} />
-         );
-      })}
+        {petList.map((item, index) => {
+          return (
+            <MainListCard
+              key={index}
+              name={petList[index].name}
+              img={{ uri: petList[index].thumbnail }}
+              subtitle={petList[index].description}
+              gender={petList[index].gender}
+              onPress={() => haddleSelectPet(petList[index].id)} />
+          );
+        })}
 
-    <Button
-  style={{fontSize: 20, color: 'green'}}
-  styleDisabled={{color: 'red'}}
-  onPress={() => firebase.auth().signOut()}
-  title="Deslogar"
->
-  Deslogar
-</Button>
-       
+        <Button
+          style={{ fontSize: 20, color: 'green' }}
+          styleDisabled={{ color: 'red' }}
+          onPress={() => firebase.auth().signOut()}
+          title="Deslogar"
+        >
+          Deslogar
+        </Button>
+
       </Content>
-
-
-       
-
     </Container>
 
   );
@@ -90,40 +84,7 @@ export default function HomeScreen({ navigation }) {
 
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5
-  },
-  openButton: {
-    backgroundColor: "#F194FF",
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center"
+  container: {
+    backgroundColor: '#E5E5E5'
   }
 });

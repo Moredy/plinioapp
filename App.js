@@ -32,7 +32,7 @@ export default class App extends React.Component {
     });
     this.setState({ isReady: true });
   }
-  
+
   render() {
     return <AppNavigator />;
   }

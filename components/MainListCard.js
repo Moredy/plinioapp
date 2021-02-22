@@ -10,12 +10,11 @@ export default class MainListCard extends Component {
 
     return (
 
-
-      <Card button onPress={
-        this.props.onPress}
-        
+      <View style={card.main} >
+        <Card
+          style={{ marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0 }}
         >
-        {/*
+          {/*
      
         <CardItem button onPress={
           this.props.onPress}>
@@ -37,68 +36,74 @@ export default class MainListCard extends Component {
         </CardItem> */}
 
 
-        <CardItem button onPress={
-        this.props.onPress}
 
-        style={{
-          paddingLeft: 0,
-          paddingRight: 0,
-          paddingTop: 0,
-          paddingBottom: 0
-      }}
-    
-        >
+          <CardItem button onPress={
+            this.props.onPress}
+
+            style={{
+              paddingLeft: 0,
+              paddingRight: 0,
+              paddingTop: 0,
+              paddingBottom: 0
+            }}
+
+          >
 
 
-        
-        <Image source={this.props.img} style={{ height: 300, width: null, flex: 1, position: "relative"}} ></Image>
 
-        <MaterialCommunityIcons name="bookmark" style={{ height: null , position: "absolute", top: 30, right: 30 }} size={34} color="black"></MaterialCommunityIcons>
+            <Image source={this.props.img} style={{ height: 300, width: null, flex: 1, position: "relative" }} ></Image>
 
-        </CardItem>
+            <MaterialCommunityIcons name="bookmark" style={{ height: null, position: "absolute", top: 30, right: 30 }} size={34} color="black"></MaterialCommunityIcons>
 
-        <CardItem>
-          <Left>
-            <Body>
-              <Text style={text.title} >{this.props.name}</Text>
-              <View style={{ borderBottomColor: '#0ABAB5' ,borderBottomWidth: 4, width: 38 }}
-/>
-              
-      
-            </Body>
-          </Left>
+          </CardItem>
 
-          <Right>
-            <Body>
-              <MaterialCommunityIcons name="calendar-month"  size={24} color="black"><Text style={text.iconText}>2 Meses</Text></MaterialCommunityIcons>
-            </Body>
-          </Right>
+          <CardItem button onPress={
+            this.props.onPress}>
+            <Left>
+              <Body>
+                <Text style={text.title} >{this.props.name}</Text>
+                <View style={{ borderBottomColor: '#0ABAB5', borderBottomWidth: 4, width: 38 }}
+                />
 
-          <Right>
-            <Body>
-              {this.props.gender == "male" ? (
-                <MaterialCommunityIcons name="gender-male"  size={24} color="black"><Text style={text.iconText}>Macho</Text></MaterialCommunityIcons>
+
+              </Body>
+            </Left>
+
+            <Right>
+              <Body>
+                <MaterialCommunityIcons name="calendar-month" size={24} color="black"><Text style={text.iconText}>2 Meses</Text></MaterialCommunityIcons>
+              </Body>
+            </Right>
+
+            <Right>
+              <Body>
+                {this.props.gender == "male" ? (
+                  <MaterialCommunityIcons name="gender-male" size={24} color="black"><Text style={text.iconText}>Macho</Text></MaterialCommunityIcons>
                 )
-                : <MaterialCommunityIcons name="gender-female"  size={24} color="black"><Text style={text.iconText}>Fêmea</Text></MaterialCommunityIcons> }
-               
-              
-              
-            </Body>
-          </Right>
+                  : <MaterialCommunityIcons name="gender-female" size={24} color="black"><Text style={text.iconText}>Fêmea</Text></MaterialCommunityIcons>}
 
 
-        </CardItem>
+
+              </Body>
+            </Right>
 
 
-        <CardItem>
-        <Left>
-            <Body>
-              <Text style={text.subtitle}>{this.props.subtitle} adasdasd asdas asdas das ddas asdas ads ds adasdasd asdas asdas das ddas asdas ads ds adasdasd asdas asdas das ddas asdas ads ds adasdasd asdas asdas das ddas asdas ads ds</Text>
-            </Body>
-          </Left>
-        </CardItem>
-      </Card>
+          </CardItem>
 
+
+          <CardItem button onPress={
+            this.props.onPress}>
+            <Left>
+              <Body>
+                <Text style={text.subtitle}>{this.props.subtitle} adasdasd asdas asdas das ddas asdas ads ds adasdasd asdas asdas das ddas asdas ads ds adasdasd asdas asdas das ddas asdas ads ds adasdasd asdas asdas das ddas asdas ads ds</Text>
+              </Body>
+            </Left>
+          </CardItem>
+
+
+
+        </Card>
+      </View>
 
     );
   }
@@ -135,3 +140,18 @@ const text = StyleSheet.create({
 });
 
 
+const card = StyleSheet.create({
+  main: {
+    borderRadius: 15,
+    overflow: 'hidden',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    marginBottom: 40
+  }
+});
