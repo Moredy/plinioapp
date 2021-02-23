@@ -3,6 +3,7 @@ import { Container, Header, Content, Card, CardItem, Body, Text, Left, Right, Th
 import { Platafrom, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
 import { Alert, TouchableHighlight, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import ConvertDate from './ConvertDate'
 
 export default class MainListCard extends Component {
 
@@ -71,7 +72,7 @@ export default class MainListCard extends Component {
 
             <Right>
               <Body>
-                <MaterialCommunityIcons name="calendar-month" size={24} color="black"><Text style={text.iconText}>2 Meses</Text></MaterialCommunityIcons>
+                <MaterialCommunityIcons name="calendar-month" size={24} color="black"><Text style={text.iconText}><ConvertDate bornDate={this.props.bornDate}/></Text></MaterialCommunityIcons>
               </Body>
             </Right>
 
@@ -152,6 +153,8 @@ const card = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    marginBottom: 40
+    marginBottom: 40,
+    marginLeft: 8,
+    marginRight: 8
   }
 });

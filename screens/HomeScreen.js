@@ -34,19 +34,6 @@ export default function HomeScreen({ navigation }) {
   }
 
 
-  const renderList = () => {
-
-    for (let i = 0; i < petList.length; i++) {
-      <MainListCard
-        name={petList[i].name}
-        img={{ uri: petList[i].thumbnail }}
-        subtitle={petList[i].description}
-        onPress={() => haddleSelectPet(petList[i].id)} 
-        />
-    }
-
-
-  }
 
 
   return (
@@ -63,6 +50,7 @@ export default function HomeScreen({ navigation }) {
               img={{ uri: petList[index].thumbnail }}
               subtitle={petList[index].description}
               gender={petList[index].gender}
+              bornDate={petList[index].bornDate}
               onPress={() => haddleSelectPet(petList[index].id)} />
           );
         })}
