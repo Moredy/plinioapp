@@ -50,7 +50,7 @@ export default class MainListCard extends Component {
 
           >
 
-
+        
 
             <Image source={this.props.img} style={{ height: 300, width: null, flex: 1, position: "relative" }} ></Image>
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button , Image} from 'react-native';
 import { Text } from 'native-base';
 
 import {
@@ -28,6 +28,17 @@ function PetInfoScreen({ navigation }) {
 
     return (
       <View style={styles.container}>
+              <Image
+        source={{ uri: petObj.thumbnail }}
+        style={{ width: "100%", height: 400, top: 0, position: 'absolute' }}
+      />
+
+
+
+        <View style={{ width: "100%", height: 320,  position: 'absolute',
+  bottom:0 , borderTopLeftRadius: 35, borderTopRightRadius: 35, backgroundColor: "#fff"}} >
+
+        {/*
         <Text>PetInfoScreen</Text>
         <Text>Id: {petObj.id}</Text>
         <Text>Name: {petObj.name}</Text>
@@ -37,10 +48,19 @@ function PetInfoScreen({ navigation }) {
         <Text>Data de Nascimento: {petObj.bornDate}</Text>
         <Text>Thumbnail: {petObj.thumbnail}</Text>
         <Text>Tags: {petObj.tags}</Text>
+        */}
 
+
+        <View style={{ padding: 20}} 
+        >
+        <Text>{petObj.name}</Text>
+
+        <Text>{petObj.description}</Text>
 
         <Button title="Adotar" onPress={() => navigation.navigate('AdocaoControlScreen', { petObj })} />
         <Button title="Voltar para home" onPress={() => navigation.navigate('HomeScreen')} />
+        </View>
+        </View>
 
       </View>
     );
