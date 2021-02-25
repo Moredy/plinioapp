@@ -12,29 +12,34 @@ export default function ConvertDate(props) {
     //console.log(props.bornDate)
 
 
+    function getDuration(milli){
+
+
+        let minutes = Math.floor(milli / 60000);
+        let hours = Math.round(minutes / 60);
+        let days = Math.round(hours / 24);
+
+
+        return days
+        
+      };
+
+
     const getAge=(dateString)=>{
 
-        var bornDate = new Date (dateString);
+        var timeStampBornDate = Number(dateString);
 
-        console.log ("---" + bornDate)
+        var timeStampNow = Date.now();
 
-        var date = new Date().getDate();
-        var month = new Date().getMonth() + 1;
-        var year = new Date().getFullYear();
+        var ageInMilisseconds = timeStampNow - timeStampBornDate;
 
-        var age = year-bornDate.getFullYear()
-        var m = month-bornDate.getMonth()
+        var age = (getDuration(ageInMilisseconds));
 
-        if ( m <0 || ( m===0 && date < bornDate)) {
-            age--
-        }
-            
+        console.log (age)
+
           return age;//format: dd-mm-yyyy;
     }
 
-
-    return getAge(props.bornDate);
-
-
+    return getAge(props.bornDate) + " dias";
 
 }

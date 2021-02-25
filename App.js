@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
 
 import LoginScreen from './screens/LoginScreen';
 import PetInfoScreen from './screens/PetInfoScreen';
@@ -9,11 +9,23 @@ import HomeScreen from './screens/HomeScreen';
 import AdocaoScreen from './screens/AdocaoScreen';
 import { Ionicons } from '@expo/vector-icons';
 
-
-
 import * as firebase from 'firebase';
 import { firebaseConfig } from './config';
+
+
+
 firebase.initializeApp(firebaseConfig);
+
+
+const RootStack = createStackNavigator ({
+  HomeScreen: HomeScreen, 
+  AdocaoControlScreen: AdocaoControlScreen,
+  LoginScreen: LoginScreen,
+  PetInfoScreen: PetInfoScreen,
+  AdocaoScreen: AdocaoScreen,
+}, { headerMode: 'none' } )
+
+const RootComp = createAppContainer(RootStack);
 
 export default class App extends React.Component {
 
@@ -34,7 +46,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    return <AppNavigator />;
+    return <RootComp />;
   }
 }
 

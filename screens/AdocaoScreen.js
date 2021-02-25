@@ -1,11 +1,20 @@
 import React, { Component, useState, useEffect } from 'react';
-import { View, StyleSheet, Button, TextInput, Alert, ActivityIndicator, Text } from 'react-native';
+import { View, StyleSheet, Button, TextInput, Alert, ActivityIndicator, Text, BackHandler } from 'react-native';
 
 import { Container, Header, Form, Item, Input, Label, Content, Card, CardItem, Body, Left , Right, Title, Subtitle } from 'native-base';
 import firebase from 'firebase';
 import { NavigationNativeContainer } from '@react-navigation/native';
 
 function AdocaoScreen({ navigation }) {
+
+  const handleBackButtonClick = () => {
+    navigation.goBack(null); // Pula a loading screen.
+  }
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => backHandler.remove();
+  }, []); 
 
   const petObj = navigation.getParam('petObj', 'NO-OBJ')
 

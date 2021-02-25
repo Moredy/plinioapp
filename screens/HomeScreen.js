@@ -1,6 +1,6 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Container, Header, Content, Card, CardItem, Body, Text, Input, Form, Item } from 'native-base';
-import { Platafrom, StyleSheet, View, Image, TouchableOpacity, TouchableHighlight, Modal, Button, TextInput } from 'react-native';
+import { Platafrom, StyleSheet, View, Image, TouchableOpacity, TouchableHighlight, Modal, Button, TextInput, BackHandler, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firebase from 'firebase';
 
@@ -11,6 +11,8 @@ import {
 } from "../variables/petList.js";
 
 export default function HomeScreen({ navigation }) {
+
+
 
 
   const saveSelectedPetOnLocalStorage = async (petId) => {
