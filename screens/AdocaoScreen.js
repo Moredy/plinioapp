@@ -43,22 +43,7 @@ function AdocaoScreen({ navigation }) {
 
   }
 
-  const successMessage = () => {
-    Alert.alert(
-      "Pedido para adoção",
-      "Seu pedido foi registrado com sucesso, agora você pode acompanhar o processo de adoção em `Minhas Adoções`. ",
-      [
-        {
-          text: "Voltar para home",
-          onPress: () => navigation.navigate('HomeScreen'),
-          style: "cancel"
-        },
-        { text: "Ir para minhas adoções", onPress: () => navigation.navigate('MinhasAdocoesScreen') }
-      ],
-      { cancelable: false }
-    );
 
-  }
 
   const writeNewAdoptRequest = async () => {
 
@@ -93,7 +78,7 @@ function AdocaoScreen({ navigation }) {
     writeNewUserData()
 
     if (await writeNewAdoptRequest() == 1) {
-      successMessage()
+      navigation.navigate('TermosAdocaoScreen')
     }
     else {
       alert("Ocorreu algum erro :( ")
@@ -112,8 +97,16 @@ function AdocaoScreen({ navigation }) {
   firebase.database().ref('/users/' + userUid).once('value').then((snapshot) => {
     if (snapshot.val()) {
       //console.log (snapshot.val().adress)
+      
       setAdressStatic(snapshot.val().adress)
       setPhoneStatic(snapshot.val().phone)
+
+      //Caso o endereço e o telefone já estiverem cadastrados ele pula a etapa
+      if (snapshot.val().adress && snapshot.val().phone) {
+        navigation.navigate('TermosAdocaoScreen')
+      }
+
+
     }
   });
 
@@ -139,25 +132,9 @@ function AdocaoScreen({ navigation }) {
       <Container style={styles.container}>
 
 
-        <Text style={{ marginBottom: "5%" }}>Leia os termos e caso necessário finalize o seu perfil para aplicar para adoção!</Text>
+        <Text style={{ marginBottom: "5%" }}>Finalize o seu perfil para prosseguir com a adoção</Text>
 
         <Content style={styles.container2}>
-          <Card style={{ marginBottom: "5%" }}>
-            <CardItem header>
-              <Text>TERMOS PARA ADOÇÃO</Text>
-            </CardItem>
-            <CardItem>
-              <Body>
-                <Text style={{textTransform : "uppercase"}}>
-                  Ao adotar {petObj.name}, declaro-me apto para assumir a guarda e a responsabilidade sobre este animal, eximindo o doador de toda e
-qualquer responsabilidade por quaisquer atos praticados pelo animal a partir desta data.  Declaro ainda estar ciente de todos os cuidados que este
-animal exige no que se refere à sua guarda e manutenção, além de conhecer todos os riscos inerentes à espécie no convívio com humanos,
-estando apto a guardá-lo e vigiá-lo, comprometendo-me a proporcionar boas condições de alojamento e alimentação, assim como, espaço físico
-que possibilite o animal se exercitar
-                </Text>
-              </Body>
-            </CardItem>
-          </Card >
 
 
           {adressStatic == "loading" || phoneStatic == "loading" ? (
@@ -180,14 +157,15 @@ que possibilite o animal se exercitar
             </Item>
           ) : null}
 
-          {phone && adress || adressStatic && phoneStatic ? (
-            <Button title="Eu concordo com os termos e gostaria de aplicar para adoção" onPress={haddleConfirmAdopt} />
-          ) : null}
-
-        
 
 
         </Content>
+
+        
+
+        {phone && adress || adressStatic && phoneStatic ? (
+            <Button title="Gostaria de aplicar para adoção" onPress={haddleConfirmAdopt} />
+          ) : <Button disabled title="Gostaria de aplicar para adoção" onPress={haddleConfirmAdopt} />}
 
         {/*<Button title="Sign out" onPress={() => firebase.auth().signOut()} />*/}
         

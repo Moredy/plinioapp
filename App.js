@@ -7,6 +7,7 @@ import PetInfoScreen from './screens/PetInfoScreen';
 import AdocaoControlScreen from './screens/AdocaoControlScreen';
 import HomeScreen from './screens/HomeScreen';
 import AdocaoScreen from './screens/AdocaoScreen';
+import TermosAdocaoScreen from './screens/TermosAdocaoScreen'
 import { Ionicons } from '@expo/vector-icons';
 
 import * as firebase from 'firebase';
@@ -23,6 +24,8 @@ const RootStack = createStackNavigator ({
   LoginScreen: LoginScreen,
   PetInfoScreen: PetInfoScreen,
   AdocaoScreen: AdocaoScreen,
+  TermosAdocaoScreen: TermosAdocaoScreen,
+
 }, { headerMode: 'none' } )
 
 const RootComp = createAppContainer(RootStack);
@@ -49,7 +52,7 @@ export default class App extends React.Component {
     return <RootComp />;
   }
 }
-
+/*
 const AppSwitchNavigator = createSwitchNavigator({
   HomeScreen: HomeScreen,
   AdocaoControlScreen: AdocaoControlScreen,
@@ -58,8 +61,9 @@ const AppSwitchNavigator = createSwitchNavigator({
   AdocaoScreen: AdocaoScreen,
 });
 
-const AppNavigator = createAppContainer(AppSwitchNavigator);
 
+const AppNavigator = createAppContainer(AppSwitchNavigator);
+*/
 const styles = StyleSheet.create({
   container: {
     flex: 1,
