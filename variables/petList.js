@@ -58,6 +58,18 @@ const petList = [
         ongId: "42",
         petType: "cat",
         tags: [ "Adora passear", "Silencioso", "Come muito"]
+    },
+    {
+        id: 5,
+        name: "Dxtery",
+        description: "Rapaz bacana.",
+        region: "Gueto",
+        thumbnail: "https://exkode.com/images/gamess.png",
+        bornDate: "1456356858000",
+        gender: "male",
+        ongId: "42",
+        petType: "cat",
+        tags: [ "Adora passear", "Silencioso", "Come muito"]
     }
     ];
       

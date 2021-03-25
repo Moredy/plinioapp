@@ -4,6 +4,7 @@ import { View, StyleSheet, Button, TextInput, Alert, ActivityIndicator, Text, Ba
 import { Container, Header, Form, Item, Input, Label, Content, Card, CardItem, Body, Left , Right, Title, Subtitle } from 'native-base';
 import firebase from 'firebase';
 import { NavigationNativeContainer } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons'; 
 
 function AdocaoScreen({ navigation }) {
 
@@ -45,45 +46,14 @@ function AdocaoScreen({ navigation }) {
 
 
 
-  const writeNewAdoptRequest = async () => {
 
-    let userDataObj;
-
-    await firebase.database().ref('/users/' + userUid).once('value').then((snapshot) => {
-      if (snapshot.val()) {
-        userDataObj = {
-          first_name: snapshot.val().first_name,
-          last_name: snapshot.val().last_name,
-          gmail: snapshot.val().gmail,
-          adress: snapshot.val().adress,
-          created_at: snapshot.val().created_at,
-          phone: snapshot.val().phone,
-          profile_picture: snapshot.val().profile_picture
-        }
-      }
-    });
-
-    const adoptRequest = [petObj, userDataObj];
-
-    //Pedido de adoção
-    console.log(adoptRequest)
-
-    if (petObj && userDataObj) {
-      return 1; //Sucess return
-    }
-  }
 
   const haddleConfirmAdopt = async () => {
 
     writeNewUserData()
 
-    if (await writeNewAdoptRequest() == 1) {
-      navigation.navigate('TermosAdocaoScreen')
-    }
-    else {
-      alert("Ocorreu algum erro :( ")
-    }
-
+ 
+      navigation.navigate('TermosAdocaoScreen' , { petObj } )
 
   }
 
@@ -103,7 +73,7 @@ function AdocaoScreen({ navigation }) {
 
       //Caso o endereço e o telefone já estiverem cadastrados ele pula a etapa
       if (snapshot.val().adress && snapshot.val().phone) {
-        navigation.navigate('TermosAdocaoScreen')
+        navigation.navigate('TermosAdocaoScreen', { petObj })
       }
 
 
@@ -165,7 +135,7 @@ function AdocaoScreen({ navigation }) {
 
         {phone && adress || adressStatic && phoneStatic ? (
             <Button title="Gostaria de aplicar para adoção" onPress={haddleConfirmAdopt} />
-          ) : <Button disabled title="Gostaria de aplicar para adoção" onPress={haddleConfirmAdopt} />}
+          ) : <Button disabled title="Gostaria de aplicar para adoção" />}
 
         {/*<Button title="Sign out" onPress={() => firebase.auth().signOut()} />*/}
         
