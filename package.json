@@ -1,5 +1,5 @@
 {
-  "name": "adoptapp",
+  "name": "barbersapp",
   "version": "1.6.0",
   "description": "Aplicativo de gerenciamento de OEE desenvolvido para Takashi Shintani",
   "main": "node_modules/expo/AppEntry.js",

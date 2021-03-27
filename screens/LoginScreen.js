@@ -57,12 +57,15 @@ class LoginScreen extends Component {
                     // console.log('Snapshot', snapshot);
                   });
               } else {
+
+              
                 firebase
                   .database()
                   .ref('/users/' + result.user.uid)
                   .update({
                     last_logged_in: Date.now()
                   });
+                  
               }
             })
             .catch(function(error) {

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "adoptapp",
-    "slug": "adoptapp",
+    "name": "barbersapp",
+    "slug": "barbersapp",
     "privacy": "public",
     "platforms": [
       "ios",

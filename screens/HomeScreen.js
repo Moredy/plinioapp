@@ -44,6 +44,8 @@ export default function HomeScreen({ navigation }) {
 
       <Content>
 
+        {/*
+
         {petList.map((item, index) => {
           return (
             <MainListCard
@@ -57,6 +59,23 @@ export default function HomeScreen({ navigation }) {
           );
         })}
 
+      */}
+
+<Button
+          style={{ fontSize: 20, color: 'green' }}
+          styleDisabled={{ color: 'red' }}
+          onPress={() => navigation.navigate('CorteRapidoControlScreen')}
+          title="Corte rapido"
+        > Corte rapido </Button>
+
+<Button
+          style={{ fontSize: 20, color: 'green' }}
+          styleDisabled={{ color: 'red' }}
+          onPress={() => firebase.auth().signOut()}
+          title="Agende seu corte"
+        > Agende seu corte </Button>
+
+      
         <Button
           style={{ fontSize: 20, color: 'green' }}
           styleDisabled={{ color: 'red' }}
@@ -65,6 +84,7 @@ export default function HomeScreen({ navigation }) {
         >
           Deslogar
         </Button>
+        
 
       </Content>
     </Container>

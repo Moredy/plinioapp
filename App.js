@@ -3,15 +3,18 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
 
 import LoginScreen from './screens/LoginScreen';
-import PetInfoScreen from './screens/PetInfoScreen';
-import AdocaoControlScreen from './screens/AdocaoControlScreen';
 import HomeScreen from './screens/HomeScreen';
-import AdocaoScreen from './screens/AdocaoScreen';
-import TermosAdocaoScreen from './screens/TermosAdocaoScreen'
 import { Ionicons } from '@expo/vector-icons';
 
 import * as firebase from 'firebase';
 import { firebaseConfig } from './config';
+import HomeControlScreen from './screens/HomeControlScreen';
+import CorteRapidoScreen from './screens/CorteRapidoScreen';
+import BarberPerfilScreen from './screens/BarberPerfilScreen';
+import CorteRapidoControlScreen from './screens/CorteRapidoControlScreen';
+import CorteRapidoSelecioneCorteScreen from './screens/CorteRapidoSelecioneCorteScreen';
+import CorteRapidoFinalizarPerfilScreen from './screens/CorteRapidoFinalizarPerfilScreen';
+import CorteRapidoPagamento from './screens/CorteRapidoPagamento'
 
 
 
@@ -19,12 +22,16 @@ firebase.initializeApp(firebaseConfig);
 
 
 const RootStack = createStackNavigator ({
+  HomeControlScreen: HomeControlScreen,
+  CorteRapidoFinalizarPerfilScreen: CorteRapidoFinalizarPerfilScreen,
+  BarberPerfilScreen: BarberPerfilScreen,
   HomeScreen: HomeScreen, 
-  AdocaoControlScreen: AdocaoControlScreen,
+  CorteRapidoPagamento: CorteRapidoPagamento,
+  CorteRapidoControlScreen: CorteRapidoControlScreen,
+  CorteRapidoScreen: CorteRapidoScreen,
+  CorteRapidoSelecioneCorteScreen: CorteRapidoSelecioneCorteScreen,
+
   LoginScreen: LoginScreen,
-  PetInfoScreen: PetInfoScreen,
-  AdocaoScreen: AdocaoScreen,
-  TermosAdocaoScreen: TermosAdocaoScreen,
 
 }, { headerMode: 'none' } )
 

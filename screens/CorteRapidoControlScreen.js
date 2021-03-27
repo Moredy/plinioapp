@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import firebase from 'firebase';
 
-class AdocaoControlScreen extends Component {
+class CorteRapidoControlScreen extends Component {
   componentDidMount() {
     this.checkIfLoggedIn();
   }
@@ -13,9 +13,7 @@ class AdocaoControlScreen extends Component {
         console.log('AUTH STATE CHANGED CALLED ')
         if (user) {
 
-          const petObj = this.props.navigation.getParam('petObj', 'NO-OBJ')
-
-          this.props.navigation.navigate('AdocaoScreen', { petObj });
+          this.props.navigation.navigate('CorteRapidoScreen');
         } else {
           this.props.navigation.navigate('LoginScreen');
         }
@@ -36,7 +34,7 @@ class AdocaoControlScreen extends Component {
     );
   }
 }
-export default AdocaoControlScreen;
+export default CorteRapidoControlScreen;
 
 const styles = StyleSheet.create({
   container: {
