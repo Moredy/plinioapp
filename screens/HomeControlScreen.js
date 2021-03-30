@@ -12,8 +12,18 @@ class HomeControlScreen extends Component {
       function(user) {
         console.log('AUTH STATE CHANGED CALLED ')
         if (user) {
+          firebase.database().ref('/users/' + user.uid).once('value').then( async (snapshot) => {
+            if (snapshot.val()) {
+            
+              this.props.navigation.navigate('HomeScreen', { user });
 
-          this.props.navigation.navigate('HomeScreen');
+            } else {
+              alert("Você ainda não possui uma conta de usuário, por favor crie uma logando com sua conta google")
+              this.props.navigation.navigate('LoginScreen');
+            }
+        
+          });
+         
 
         } else {
 

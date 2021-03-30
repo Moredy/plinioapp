@@ -14,13 +14,49 @@ import MainListCard from '../components/MainListCard'
 
 function CorteRapidoScreen({ navigation }) {
 
+  const [babersOnList, setBabersOnList] = useState(false); //To show ur remaining Text
+
   const handleBackButtonClick = () => {
     navigation.goBack(null); // Pula a loading screen.
   }
 
+
   useEffect(() => {
+
+    firebase.database().ref('/barbers/').on('value', function (snapshot) {
+      if (snapshot.val()) {
+      let barbersArray = Object.entries(snapshot.val()).map((e) => ( { [e[0]]: e[1] } ))
+
+      //let newBarbers = barbersArray.map((item, index) => {
+      //  return barbersArray[index][Object.keys(barbersArray)[index]]
+      //});
+
+      let barbersArrayOn = []
+
+      barbersArray.map((item, index) => {
+
+        if (barbersArray[index][Object.keys(barbersArray[index])[0]].disponivelParaCorteRapido) {
+          barbersArrayOn.push(barbersArray[index])
+        }
+    
+      });
+
+      setBabersOnList(barbersArrayOn)
+      
+    }
+
+  });
+    
+
+
+
+  
+
     const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
     return () => backHandler.remove();
+
+
+
   }, []); 
 
 
@@ -78,18 +114,18 @@ function CorteRapidoScreen({ navigation }) {
 
         <Content style={styles.container2}>
 
-        {barbersList.map((item, index) => {
+        {babersOnList ? babersOnList.map((item, index) => {
           return (
             <MainListCard
               key={index}
-              name={barbersList[index].name}
+              name={babersOnList[index][Object.keys(babersOnList[index])[0]].name}
               img={{ uri: barbersList[index].thumbnail }}
-              subtitle={barbersList[index].description}
+              subtitle={babersOnList[index][Object.keys(babersOnList[index])[0]].specialties}
               gender={barbersList[index].gender}
               bornDate={barbersList[index].bornDate}
               onPress={() => haddleSelectBarber(barbersList[index].id)} />
           );
-        })}
+        }) : null}
 
 
         </Content>

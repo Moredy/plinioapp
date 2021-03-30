@@ -95,6 +95,7 @@ export default function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 50,
     backgroundColor: '#E5E5E5'
   }
 });
