@@ -32,6 +32,8 @@ function CorteRapidoSelecioneCorteScreen({ navigation }) {
   const handleCabelo = () => {
    
     const pedido = {barbeiro: barberObj, opcoes: {tipoDeCorte: "rapido", corte: "cabelo"}}
+
+    console.log (pedido)
     navigation.navigate('CorteRapidoFinalizarPerfilScreen', { pedido })
 
   }

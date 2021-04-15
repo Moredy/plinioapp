@@ -14,8 +14,9 @@ import BarberPerfilScreen from './screens/BarberPerfilScreen';
 import CorteRapidoControlScreen from './screens/CorteRapidoControlScreen';
 import CorteRapidoSelecioneCorteScreen from './screens/CorteRapidoSelecioneCorteScreen';
 import CorteRapidoFinalizarPerfilScreen from './screens/CorteRapidoFinalizarPerfilScreen';
-import CorteRapidoPagamento from './screens/CorteRapidoPagamento'
-
+import CorteRapidoPagamento from './screens/CorteRapidoPagamento';
+import CorteRapidoAguardandoBarbeiro from './screens/CorteRapidoAguardandoBarbeiro';
+import CorteRapidoIncomeScreen from './screens/CorteRapidoIncomeScreen';
 
 
 firebase.initializeApp(firebaseConfig);
@@ -29,7 +30,9 @@ const RootStack = createStackNavigator ({
   CorteRapidoPagamento: CorteRapidoPagamento,
   CorteRapidoControlScreen: CorteRapidoControlScreen,
   CorteRapidoScreen: CorteRapidoScreen,
+  CorteRapidoAguardandoBarbeiro: CorteRapidoAguardandoBarbeiro,
   CorteRapidoSelecioneCorteScreen: CorteRapidoSelecioneCorteScreen,
+  CorteRapidoIncomeScreen: CorteRapidoIncomeScreen,
 
   LoginScreen: LoginScreen,
 

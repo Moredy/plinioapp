@@ -3,6 +3,8 @@ import { Container, Header, Content, Card, CardItem, Body, Text, Input, Form, It
 import { Platafrom, StyleSheet, View, Image, TouchableOpacity, TouchableHighlight, Modal, Button, TextInput, BackHandler, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firebase from 'firebase';
+import axios from 'axios';
+
 
 import MainListCard from '../components/MainListCard'
 
@@ -12,16 +14,75 @@ import {
 
 export default function HomeScreen({ navigation }) {
 
+  useEffect(() => {
+    redirectToIncomeCallsIfIncome()
+  },[navigation]);
 
 
 
-  const saveSelectedPetOnLocalStorage = async (petId) => {
+  var user = firebase.auth().currentUser;
 
-    try {
-      await AsyncStorage.setItem('@selectedPet_id', `${petId}`)
-    } catch (e) {
-      // saving error
+  if (user) {
+    var userUid = user.uid
+  } else {
+    // No user is signed in.
+  }
+
+
+  const geoloc = () => {
+    var location = "Rua Alzevides Gonçalves Pereira, Vila Aurea Maria, Mogi das Cruzes"
+
+    axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+      params: {
+        address: location,
+        key: 'AIzaSyC8Y1Mk54q326CdAqQEMSbtmcYCbhmaDcc'
+      }
+    })
+      .then(function (response) {
+        // Log full response
+        console.log(response);
+      }
+      );
+
+
+  }
+
+
+  const redirectToIncomeCallsIfIncome = async () => {
+
+    var barberRequest = await AsyncStorage.getItem('barberRequest');
+    barberRequest = JSON.parse(barberRequest);
+    var idreq = await AsyncStorage.getItem('idreq');
+    console.log('requests/' + Object.keys(barberRequest.pedido.barbeiro)[0] + '/' + idreq)
+
+
+    if (barberRequest && idreq) {
+
+      console.log('requests/' + Object.keys(barberRequest.pedido.barbeiro)[0] + '/' + idreq)
+
+      firebase.database().ref('requests/' + Object.keys(barberRequest.pedido.barbeiro)[0] + '/' + idreq).on('value', (snapshot) => {
+        if (snapshot.val()) {
+          
+          navigation.navigate('CorteRapidoAguardandoBarbeiro' , { barberRequest , idreq })
+        }
+    
+        });
+
+        
+
+      firebase.database().ref('incomeCalls/' + Object.keys(barberRequest.pedido.barbeiro)[0] + '/' + idreq).on('value', (snapshot) => {
+        if (snapshot.val()) {
+       
+         console.log(barberRequest)
+          navigation.navigate('CorteRapidoIncomeScreen' ,  { barberRequest , idreq } )
+        }
+    
+        });
+
+
+  
     }
+    
 
   }
 
@@ -34,6 +95,7 @@ export default function HomeScreen({ navigation }) {
     //Navegar para tela de adoção
 
   }
+
 
 
 
@@ -61,21 +123,21 @@ export default function HomeScreen({ navigation }) {
 
       */}
 
-<Button
+        <Button
           style={{ fontSize: 20, color: 'green' }}
           styleDisabled={{ color: 'red' }}
           onPress={() => navigation.navigate('CorteRapidoControlScreen')}
           title="Corte rapido"
         > Corte rapido </Button>
 
-<Button
+        <Button
           style={{ fontSize: 20, color: 'green' }}
           styleDisabled={{ color: 'red' }}
           onPress={() => firebase.auth().signOut()}
           title="Agende seu corte"
         > Agende seu corte </Button>
 
-      
+
         <Button
           style={{ fontSize: 20, color: 'green' }}
           styleDisabled={{ color: 'red' }}
@@ -84,7 +146,16 @@ export default function HomeScreen({ navigation }) {
         >
           Deslogar
         </Button>
-        
+
+        <Button
+          style={{ fontSize: 20, color: 'green' }}
+          styleDisabled={{ color: 'red' }}
+          onPress={geoloc}
+          title="GeoLoc"
+        >
+          GeoLoc
+        </Button>
+
 
       </Content>
     </Container>

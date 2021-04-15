@@ -52,7 +52,7 @@ export default class MainListCard extends Component {
 
         
 
-            <Image source={this.props.img} style={{ height: 300, width: null, flex: 1, position: "relative" }} ></Image>
+           {/* <Image source={this.props.img} style={{ height: 300, width: null, flex: 1, position: "relative" }} ></Image>*/}
 
             <MaterialCommunityIcons name="bookmark" style={{ height: null, position: "absolute", top: 30, right: 30 }} size={34} color="black"></MaterialCommunityIcons>
 
@@ -69,7 +69,7 @@ export default class MainListCard extends Component {
 
               </Body>
             </Left>
-
+{/*
             <Right>
               <Body>
                 <MaterialCommunityIcons name="calendar-month" size={24} color="black"><Text style={text.iconText}><ConvertDate bornDate={this.props.bornDate}/></Text></MaterialCommunityIcons>
@@ -87,7 +87,7 @@ export default class MainListCard extends Component {
 
               </Body>
             </Right>
-
+*/}
 
           </CardItem>
 
@@ -96,7 +96,7 @@ export default class MainListCard extends Component {
             this.props.onPress}>
             <Left>
               <Body>
-                <Text style={text.subtitle}>{this.props.subtitle} adasdasd asdas asdas das ddas asdas ads ds adasdasd asdas asdas das ddas asdas ads ds adasdasd asdas asdas das ddas asdas ads ds adasdasd asdas asdas das ddas asdas ads ds</Text>
+                <Text style={text.subtitle}>{this.props.subtitle}</Text>
               </Body>
             </Left>
           </CardItem>

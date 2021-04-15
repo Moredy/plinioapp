@@ -22,6 +22,7 @@
     "@react-navigation/native": "5.0.0",
     "@react-navigation/stack": "5.9.0",
     "@use-expo/font": "^2.0.0",
+    "axios": "^0.21.1",
     "expo": "^40.0.0",
     "expo-asset": "~8.2.0",
     "expo-font": "~8.4.0",
@@ -32,12 +33,17 @@
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
+    "react-native-geocoding": "^0.5.0",
     "react-native-gesture-handler": "~1.7.0",
+    "react-native-google-places-autocomplete": "^2.2.0",
+    "react-native-maps": "^0.27.1",
+    "react-native-maps-directions": "^1.8.0",
     "react-native-modal-dropdown": "git+https://github.com/siemiatj/react-native-modal-dropdown.git",
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.4",
     "react-native-screens": "~2.10.1",
-    "react-navigation": "^3.0.9"
+    "react-navigation": "^3.0.9",
+    "styled-components": "^5.2.3"
   },
   "devDependencies": {
     "babel-preset-expo": "8.3.0"

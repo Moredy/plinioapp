@@ -12,6 +12,8 @@ import {
 
 import MainListCard from '../components/MainListCard'
 
+
+
 function CorteRapidoPagamento({ navigation }) {
 
 
@@ -21,14 +23,12 @@ function CorteRapidoPagamento({ navigation }) {
 
     const handleProsseguir = (barberRequest) => {
 
-
+        console.log (barberRequest)
         Alert.alert(
-            "Verifique os dados do pedido antes pagar",
+            "Verifique os dados do barbeiro antes pagar",
 
-
-            "Endereço: " + barberRequest.cliente.adress+ "\n" +
-            "Barbeiro: " + barberRequest.pedido.barbeiro.name + "\n" +
-            "Especialidades: " +  barberRequest.pedido.barbeiro.especialidades ,
+            "Barbeiro: " + barberRequest.pedido.barbeiro[Object.keys(barberRequest.pedido.barbeiro)[0]].name + "\n" +
+            "Especialidades: " +  barberRequest.pedido.barbeiro[Object.keys(barberRequest.pedido.barbeiro)[0]].specialties ,
             [
               {
                 text: "Refazer",
@@ -36,17 +36,39 @@ function CorteRapidoPagamento({ navigation }) {
                 style: "cancel"
               },
 
-              { text: "Pagar com " + formaDePagamento, onPress: () => handlePagamento(formaDePagamento) }
+              { text: "Pagar com " + formaDePagamento, onPress: () => handlePagamento(formaDePagamento, barberRequest) }
             ]
           );
     }
 
+    function makeid(length) {
+        var result           = [];
+        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+          result.push(characters.charAt(Math.floor(Math.random() * 
+     charactersLength)));
+       }
+       return result.join('');
+    }
 
-    const handlePagamento = (formaDePagamento) => {
+
+    const handlePagamento = (formaDePagamento, barberRequest) => {
 
         if (formaDePagamento == "Dinheiro")
         {
            //PAGAR COM DINHEIRO
+
+
+           console.log(barberRequest) 
+
+           const idreq = makeid(24)
+  
+           firebase.database().ref('requests/' + Object.keys(barberRequest.pedido.barbeiro)[0] + "/" + idreq).set({
+            barberRequest, status: "open" });
+
+            navigation.navigate('CorteRapidoAguardandoBarbeiro', { barberRequest , status: "open", idreq })
+        
 
         } 
         else if (formaDePagamento == "Cartão De Crédito") 

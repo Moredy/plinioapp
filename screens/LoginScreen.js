@@ -7,11 +7,13 @@ class LoginScreen extends Component {
   isUserEqual = (googleUser, firebaseUser) => {
     if (firebaseUser) {
       var providerData = firebaseUser.providerData;
+      console.log(googleUser.user)
       for (var i = 0; i < providerData.length; i++) {
         if (
           providerData[i].providerId ===
             firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
-          providerData[i].uid === googleUser.getBasicProfile().getId()
+            providerData[i].uid === googleUser.user.id
+          //providerData[i].uid === googleUser.getBasicProfile().getId()
         ) {
           // We don't need to reauth the Firebase connection.
           return true;
@@ -21,6 +23,7 @@ class LoginScreen extends Component {
     return false;
   };
   onSignIn = googleUser => {
+  
     console.log('Google Auth Response', googleUser);
     // We need to register an Observer on Firebase Auth to make sure auth is initialized.
     var unsubscribe = firebase.auth().onAuthStateChanged(

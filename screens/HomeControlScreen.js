@@ -18,7 +18,7 @@ class HomeControlScreen extends Component {
               this.props.navigation.navigate('HomeScreen', { user });
 
             } else {
-              alert("Você ainda não possui uma conta de usuário, por favor crie uma logando com sua conta google")
+              //alert("Você ainda não possui uma conta de usuário, por favor crie uma logando com sua conta google")
               this.props.navigation.navigate('LoginScreen');
             }
         

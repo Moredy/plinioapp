@@ -23,23 +23,9 @@ function BarberPerfilScreen({ navigation }) {
     return () => backHandler.remove();
   }, []); 
 
-  const barberId = navigation.getParam('barberId', 'NO-ID')
+  const barberObj = navigation.getParam('barberObj', 'NO-OBJ')
 
-
-  const getBarberInfo = (barberId) => {
-
-    for (let i = 0; i < barbersList.length; i++) {
-      if (barbersList[i].id == barberId) {
-        return barbersList[i]
-      }
-
-    }
-
-  }
-
-  const barberObj = getBarberInfo(barberId);
-
-
+ console.log( )
 
   let userUid;
 
@@ -63,13 +49,11 @@ function BarberPerfilScreen({ navigation }) {
 
 
         <Content style={styles.container2}>
-
-        <Text>Id: {barberObj.id}</Text>
-        <Text>Nome: {barberObj.name}</Text>
-        <Text>Descrição: {barberObj.description}</Text>
-        <Text>Genero: {barberObj.gender}</Text>
-        <Text>Especialidades {barberObj.especialidades}</Text>
-        <Text>Rating: {barberObj.rating}</Text>
+        <Text>Id: {Object.keys(barberObj)[0]}</Text>
+        <Text>Nome: {barberObj[Object.keys(barberObj)[0]].name}</Text>
+        <Text>Especialidades: {barberObj[Object.keys(barberObj)[0]].specialties}</Text>
+        <Text>Phone: {barberObj[Object.keys(barberObj)[0]].phone}</Text>
+        <Text>Rating: </Text>
 
 
         </Content>

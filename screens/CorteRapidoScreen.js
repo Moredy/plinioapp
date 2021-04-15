@@ -37,6 +37,8 @@ function CorteRapidoScreen({ navigation }) {
 
         if (barbersArray[index][Object.keys(barbersArray[index])[0]].disponivelParaCorteRapido) {
           barbersArrayOn.push(barbersArray[index])
+
+          console.log(barbersArray[index][Object.keys(barbersArray[index])[0]].disponivelParaCorteRapido)
         }
     
       });
@@ -85,13 +87,13 @@ function CorteRapidoScreen({ navigation }) {
 
   }
 
-  const haddleSelectBarber = (barberId) => {
+  const haddleSelectBarber = (barberObj) => {
 
-    saveSelectedBarberOnLocalStorage(barberId)
+    //saveSelectedBarberOnLocalStorage(barberId)
 
-    console.log (barberId + " ID BARBER")
+    console.log (barberObj)
 
-    navigation.navigate('BarberPerfilScreen', { barberId })
+    navigation.navigate('BarberPerfilScreen', { barberObj })
 
   }
 
@@ -119,11 +121,11 @@ function CorteRapidoScreen({ navigation }) {
             <MainListCard
               key={index}
               name={babersOnList[index][Object.keys(babersOnList[index])[0]].name}
-              img={{ uri: barbersList[index].thumbnail }}
+              //img={{ uri: barbersList[index].thumbnail }}
               subtitle={babersOnList[index][Object.keys(babersOnList[index])[0]].specialties}
-              gender={barbersList[index].gender}
-              bornDate={barbersList[index].bornDate}
-              onPress={() => haddleSelectBarber(barbersList[index].id)} />
+              //gender={barbersList[index].gender}
+              //bornDate={barbersList[index].bornDate}
+              onPress={() => haddleSelectBarber(babersOnList[index])} />
           );
         }) : null}
 
