@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "barbersapp",
-    "slug": "barbersapp",
+    "name": "plinioapp",
+    "slug": "plinioapp",
     "privacy": "public",
     "platforms": [
       "ios",

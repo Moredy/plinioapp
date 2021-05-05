@@ -6,11 +6,9 @@ import firebase from 'firebase';
 import { NavigationNativeContainer } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons'; 
 
-import {
-  barbersList,
-} from "../variables/barbersList";
 
-import MainListCard from '../components/MainListCard'
+
+import MainListCard from '../../components/MainListCard'
 
 function BarberPerfilScreen({ navigation }) {
 

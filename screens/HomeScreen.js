@@ -1,172 +1,122 @@
 import React, { Component, useState, useEffect } from 'react';
-import { Container, Header, Content, Card, CardItem, Body, Text, Input, Form, Item } from 'native-base';
-import { Platafrom, StyleSheet, View, Image, TouchableOpacity, TouchableHighlight, Modal, Button, TextInput, BackHandler, Alert } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { View, StyleSheet, Button, TextInput, Alert, ActivityIndicator, Text, BackHandler } from 'react-native';
+
+import { Container, Header, Form, Item, Input, Label, Content, Card, CardItem, Body, Left, Right, Title, Subtitle, Accordion } from 'native-base';
 import firebase from 'firebase';
-import axios from 'axios';
+import { NavigationNativeContainer } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
 
 
-import MainListCard from '../components/MainListCard'
-
-import {
-  petList,
-} from "../variables/petList.js";
-
-export default function HomeScreen({ navigation }) {
+function HomeScreen({ navigation }) {
 
   useEffect(() => {
-    redirectToIncomeCallsIfIncome()
-  },[navigation]);
+    checkIfLoggedIn()
+
+});
 
 
+const checkIfLoggedIn = () => {
+  firebase.auth().onAuthStateChanged(
+    function(user) {
+      if (user) {
+        //Verifica se usuário tem conta de paciente
+      firebase.database().ref('/pacientes/' + user.uid).once('value').then( async (snapshot) => {
+          if (snapshot.val()) {
 
-  var user = firebase.auth().currentUser;
+            console.log (snapshot.val())
 
-  if (user) {
-    var userUid = user.uid
-  } else {
-    // No user is signed in.
-  }
+            navigation.navigate('Dashboard')
 
-
-  const geoloc = () => {
-    var location = "Rua Alzevides Gonçalves Pereira, Vila Aurea Maria, Mogi das Cruzes"
-
-    axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-      params: {
-        address: location,
-        key: 'AIzaSyC8Y1Mk54q326CdAqQEMSbtmcYCbhmaDcc'
-      }
-    })
-      .then(function (response) {
-        // Log full response
-        console.log(response);
-      }
-      );
-
-
-  }
-
-
-  const redirectToIncomeCallsIfIncome = async () => {
-
-    var barberRequest = await AsyncStorage.getItem('barberRequest');
-    barberRequest = JSON.parse(barberRequest);
-    var idreq = await AsyncStorage.getItem('idreq');
-    console.log('requests/' + Object.keys(barberRequest.pedido.barbeiro)[0] + '/' + idreq)
-
-
-    if (barberRequest && idreq) {
-
-      console.log('requests/' + Object.keys(barberRequest.pedido.barbeiro)[0] + '/' + idreq)
-
-      firebase.database().ref('requests/' + Object.keys(barberRequest.pedido.barbeiro)[0] + '/' + idreq).on('value', (snapshot) => {
-        if (snapshot.val()) {
-          
-          navigation.navigate('CorteRapidoAguardandoBarbeiro' , { barberRequest , idreq })
-        }
+          } else {
+            //Verifica se o usuario tem conta de equipe medica
+            firebase.database().ref('/equipemedica/' + user.uid).once('value').then( async (snapshot) => {
+              if (snapshot.val()) {
     
-        });
-
-        
-
-      firebase.database().ref('incomeCalls/' + Object.keys(barberRequest.pedido.barbeiro)[0] + '/' + idreq).on('value', (snapshot) => {
-        if (snapshot.val()) {
-       
-         console.log(barberRequest)
-          navigation.navigate('CorteRapidoIncomeScreen' ,  { barberRequest , idreq } )
-        }
+                navigation.navigate('DashboardEquipeMedica')
     
-        });
+              }
+            });
+          }
+      
+       });
 
-
-  
+      } else {
+        //Caso ele não possua conta.
+      }
     }
-    
+  );
+};
 
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+
+  const handleLogin = () => {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((user) => {
+
+
+        checkIfLoggedIn()
+
+        //navigation.navigate('Dashboard')
+      })
+      .catch((error) => {
+        alert(error.message)
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      });
   }
-
-  const haddleSelectPet = async (petId) => {
-
-    //Salva o pet no LocalStorage.
-    saveSelectedPetOnLocalStorage(petId)
-
-    navigation.navigate('PetInfoScreen', { petId })
-    //Navegar para tela de adoção
-
-  }
-
-
-
-
 
   return (
 
-    <Container style={styles.container}>
 
-      <Content>
+    <Container>
 
-        {/*
+      <Container style={styles.container}>
 
-        {petList.map((item, index) => {
-          return (
-            <MainListCard
-              key={index}
-              name={petList[index].name}
-              img={{ uri: petList[index].thumbnail }}
-              subtitle={petList[index].description}
-              gender={petList[index].gender}
-              bornDate={petList[index].bornDate}
-              onPress={() => haddleSelectPet(petList[index].id)} />
-          );
-        })}
+        <Item stackedLabel style={{ marginBottom: "5%" }} >
+          <Label>Email</Label>
+          <TextInput onChangeText={text => setEmail(text)} />
+        </Item>
 
-      */}
+        <Item stackedLabel style={{ marginBottom: "5%" }} >
+          <Label>Senha</Label>
+          <TextInput onChangeText={text => setPassword(text)} />
+        </Item>
 
-        <Button
-          style={{ fontSize: 20, color: 'green' }}
-          styleDisabled={{ color: 'red' }}
-          onPress={() => navigation.navigate('CorteRapidoControlScreen')}
-          title="Corte rapido"
-        > Corte rapido </Button>
-
-        <Button
-          style={{ fontSize: 20, color: 'green' }}
-          styleDisabled={{ color: 'red' }}
-          onPress={() => firebase.auth().signOut()}
-          title="Agende seu corte"
-        > Agende seu corte </Button>
+        <Button title="Entrar" onPress={handleLogin} />
 
 
-        <Button
-          style={{ fontSize: 20, color: 'green' }}
-          styleDisabled={{ color: 'red' }}
-          onPress={() => firebase.auth().signOut()}
-          title="Deslogar"
-        >
-          Deslogar
-        </Button>
-
-        <Button
-          style={{ fontSize: 20, color: 'green' }}
-          styleDisabled={{ color: 'red' }}
-          onPress={geoloc}
-          title="GeoLoc"
-        >
-          GeoLoc
-        </Button>
+        <Button title="Criar perfil de paciente" onPress={() => navigation.navigate('CriarPerfil')} />
 
 
-      </Content>
+        <Button title="Criar perfil de equipe médica" onPress={() => navigation.navigate('CriarPerfilEquipeMedica')} />
+
+      </Container>
     </Container>
-
   );
-}
 
+}
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 50,
-    backgroundColor: '#E5E5E5'
-  }
+    flex: 1,
+    marginTop: "5%",
+    marginBottom: "5%",
+    justifyContent: 'center',
+    marginLeft: "4%",
+    marginRight: "4%"
+  },
+  container2: {
+    marginBottom: "5%",
+
+  },
+  title: {
+    fontSize: 16,
+    color: "#fff",
+  },
+
+
 });

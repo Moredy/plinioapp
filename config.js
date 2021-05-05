@@ -1,9 +1,9 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyCsUfWOPabxrY6VV8kFMMo9aJ3vPYWWzik",
-  authDomain: "petadoptionapp-1d8e7.firebaseapp.com",
-  projectId: "petadoptionapp-1d8e7",
-  storageBucket: "petadoptionapp-1d8e7.appspot.com",
-  messagingSenderId: "992159461026",
-  appId: "1:992159461026:web:cce620b50cf64ba6f531fb",
-  measurementId: "G-6SEG6SR9LL"
+  apiKey: "AIzaSyDBUKl_cYv-AXuNETEr59Swhd9zAe8AiEg",
+  authDomain: "plinioapp-3de54.firebaseapp.com",
+  projectId: "plinioapp-3de54",
+  storageBucket: "plinioapp-3de54.appspot.com",
+  messagingSenderId: "415482708024",
+  appId: "1:415482708024:web:45d34a2610ccb22c48e6cd",
+  measurementId: "G-05GH8EC8E1"
 };

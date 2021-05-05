@@ -11,9 +11,7 @@ import MapView from 'react-native-maps';
 import { Dimensions } from 'react-native';
 
 
-import {
-  barbersList,
-} from "../variables/barbersList";
+
 
 import MainListCard from '../components/MainListCard'
 
